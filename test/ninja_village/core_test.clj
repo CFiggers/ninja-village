@@ -13,7 +13,10 @@
                                   :ninja/speed 2
                                   :ninja/stealth 2
                                   :ninja/tools 2}
+              :ninja/practice 0
               :ninja/special {}})
+
+(s/valid? :ninja/ninja a-ninja)
 
 (def leaf-ninjas [a-ninja])
 
@@ -27,6 +30,15 @@
                    :village/def 5
                    :ninja/ninjas leaf-ninjas
                    :village/improvements leaf-improvements})
+
+
+(def ninja1 (ninja/generate-ninja))
+
+(def ninja2 (ninja/generate-ninja))
+
+(combat/ninja-fight
+ ninja1
+ ninja2)
 
 (test/deftest basic-test
   (prn "Test run: a basic ninja, improvements, and village")

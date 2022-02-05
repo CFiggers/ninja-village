@@ -19,15 +19,6 @@
                                       :village/def
                                       :village/improvements]))
 
-(defn generate-skills [level & [academy-quality]]
-  (let [skill-base ({:genin 1 :chunin 2 :jonin 3 :kage 5} level)]
-    (into (sorted-map)
-          (zipmap (shuffle [:ninja/speed :ninja/jutsu :ninja/health 
-                            :ninja/tools :ninja/stealth])
-                  (take 5 (concat (vector (inc skill-base))
-                                  (repeat (or academy-quality 0) (inc skill-base))
-                                  (repeat skill-base)))))))
-
 (s/fdef recruit-ninja
   :args :village/village
   :ret :village/village)
@@ -38,9 +29,5 @@
                              :academy :village/imp-quality)]
     (assoc village :ninja/ninjas
            (conj (:ninja/ninjas village)
-                 {:core/name "Nina Trainee"
-                  :ninja/rank rank
-                  :ninja/ninja-stats (generate-skills
-                                     rank
-                                     academy-quality)}))))
+                 (ninja/generate-ninja rank academy-quality)))))
 
