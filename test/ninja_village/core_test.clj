@@ -54,15 +54,31 @@
 (test/deftest recruit-test
   (prn "Test run: Recruit ninjas function")
   (let [test-village leaf-village]
-    (test/testing "should recruit a genin"
-      (test/is (s/valid? :village/village
-                         (village/recruit-ninja :genin test-village))))
-    (test/testing "should recruit a chunin"
-      (test/is (s/valid? :village/village
-                         (village/recruit-ninja :chunin test-village))))
-    (test/testing "should recruit a jonin"
-      (test/is (s/valid? :village/village
-                         (village/recruit-ninja :jonin test-village))))
-    (test/testing "should recruit a kage"
-      (test/is (s/valid? :village/village
-                         (village/recruit-ninja :kage test-village))))))
+    (test/testing "recruit a genin"
+      (let [plus-genin (village/recruit-ninja :genin test-village)]
+        (test/testing "should pass spec"
+          (test/is (s/valid? :village/village plus-genin)))
+        (test/testing "should have one additional ninja"
+          (test/is (= (inc (count (:ninja/ninjas test-village)))
+                      (count (:ninja/ninjas plus-genin)))))))
+    (let [plus-chunin (village/recruit-ninja :chunin test-village)]
+      (test/testing "recruit a chunin"
+        (test/testing "should pass spec"
+          (test/is (s/valid? :village/village plus-chunin)))
+        (test/testing "should have one additional ninja"
+          (test/is (= (inc (count (:ninja/ninjas test-village)))
+                      (count (:ninja/ninjas plus-chunin)))))))
+    (let [plus-jonin (village/recruit-ninja :jonin test-village)]
+      (test/testing "recruit a jonin"
+        (test/testing "should pass spec"
+          (test/is (s/valid? :village/village plus-jonin))
+          (test/testing "should have one additional ninja"
+            (test/is (= (inc (count (:ninja/ninjas test-village)))
+                        (count (:ninja/ninjas plus-jonin))))))))
+    (let [plus-kage (village/recruit-ninja :kage test-village)]
+      (test/testing "recruit a kage"
+        (test/testing "should pass spec"
+          (test/is (s/valid? :village/village plus-kage)))
+        (test/testing "should have one additional ninja"
+          (test/is (= (inc (count (:ninja/ninjas test-village)))
+                      (count (:ninja/ninjas plus-kage)))))))))
