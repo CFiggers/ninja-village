@@ -5,7 +5,7 @@
 (s/def :core/stat (s/and int? #(<= % 6) #(>= % 1)))
 (s/def :core/name string?)
 
-(s/def :village/imp-type #{:academy :library :hospital})
+(s/def :village/imp-type #{:academy :library :hospital :ramen-shop})
 (s/def :village/imp-quality :core/stat)
 (s/def :village/improvement (s/keys :req [:core/name
                                           :village/imp-type
