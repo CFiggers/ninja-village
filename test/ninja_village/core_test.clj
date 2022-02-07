@@ -14,7 +14,12 @@
                                   :ninja/stealth 2
                                   :ninja/tools 2}
               :ninja/practice 0
-              :ninja/special {}})
+              :ninja/special {}
+              :ninja/hero true})
+
+(if (:ninja/hero a-ninja)
+  "it was true"
+  "It was false")
 
 (s/valid? :ninja/ninja a-ninja)
 
@@ -31,7 +36,6 @@
                    :ninja/ninjas leaf-ninjas
                    :village/improvements leaf-improvements})
 
-
 (def ninja1 (ninja/generate-ninja))
 
 (def ninja2 (ninja/generate-ninja))
@@ -39,6 +43,21 @@
 (combat/ninja-fight
  ninja1
  ninja2)
+
+(def shikamaru 
+  {:core/name "Shikamaru Nara"
+   :ninja/rank :genin
+   :ninja/ninja-stats #:ninja{:health 2, 
+                              :jutsu 3, 
+                              :speed 2, 
+                              :stealth 1, 
+                              :tools 1}
+   :ninja/practice 0
+   :ninja/hero true})
+
+(def rando-ninja (ninja/generate-ninja))
+
+(combat/det-winner shikamaru rando-ninja)
 
 (test/deftest basic-test
   (prn "Test run: a basic ninja, improvements, and village")
