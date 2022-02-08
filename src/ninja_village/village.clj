@@ -32,7 +32,17 @@
            (conj (:ninja/ninjas village)
                  (ninja/generate-ninja rank academy-quality)))))
 
-;; Canonical Improvements
+;; Related to :village/def
+
+;; TODO - write tests for this function
+(s/fdef upgrade-def 
+        :args :village/village
+        :ret :village/village)
+(defn upgrade-def [village & [improve-by]]
+  (update village :village/def
+          (partial + (or improve-by 1))))
+
+;; Related to :village/improvements
 
 (def canonical-academy 
   {:core/name "ninja academy"
@@ -54,6 +64,7 @@
    :village/imp-type :ramen-shop
    :village/imp-quality 1})
 
+;; TODO - write tests for this function
 (s/fdef upgrade-improvement
         :args :village/improvement
         :ret :village/improvement)
