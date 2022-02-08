@@ -31,3 +31,24 @@
            (conj (:ninja/ninjas village)
                  (ninja/generate-ninja rank academy-quality)))))
 
+;; Canonical Improvements
+
+(def canonical-academy 
+  {:core/name "ninja academy"
+   :village/imp-type :academy
+   :village/imp-quality 1})
+
+(def canonical-library 
+  {:core/name "ninja library"
+   :village/imp-type :library
+   :village/imp-quality 1})
+
+(def canonical-hospital
+  {:core/name "ninja hospital"
+   :village/imp-type :hospital
+   :village/imp-quality 1})
+
+(def canonical-ramen-shop
+  {:core/name "ninja ramen shop"
+   :village/imp-type :ramen-shop
+   :village/imp-quality 1})
