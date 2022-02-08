@@ -29,7 +29,7 @@
   (let [academy-quality (->> village :village/improvements
                              :academy :village/imp-quality)
         new-ninja (ninja/generate-ninja rank academy-quality)]
-    (update village :ninja/ninjas (partial conj new-ninja))))
+    (update village :village/ninjas #(conj % new-ninja))))
 
 ;; Related to :village/def
 
