@@ -31,7 +31,7 @@
 
 (def leaf-village {:core/name "hidden leaf"
                    :village/def 5
-                   :ninja/ninjas leaf-ninjas
+                   :village/ninjas leaf-ninjas
                    :village/improvements leaf-improvements})
 
 (def ninja1 (ninja/generate-ninja))
@@ -88,26 +88,26 @@
         (test/testing "should pass spec"
           (test/is (s/valid? :village/village plus-genin)))
         (test/testing "should have one additional ninja"
-          (test/is (= (inc (count (:ninja/ninjas test-village)))
-                      (count (:ninja/ninjas plus-genin)))))))
+          (test/is (= (inc (count (:village/ninjas test-village)))
+                      (count (:village/ninjas plus-genin)))))))
     (let [plus-chunin (village/recruit-ninja :chunin test-village)]
       (test/testing "recruit a chunin"
         (test/testing "should pass spec"
           (test/is (s/valid? :village/village plus-chunin)))
         (test/testing "should have one additional ninja"
-          (test/is (= (inc (count (:ninja/ninjas test-village)))
-                      (count (:ninja/ninjas plus-chunin)))))))
+          (test/is (= (inc (count (:village/ninjas test-village)))
+                      (count (:village/ninjas plus-chunin)))))))
     (let [plus-jonin (village/recruit-ninja :jonin test-village)]
       (test/testing "recruit a jonin"
         (test/testing "should pass spec"
           (test/is (s/valid? :village/village plus-jonin))
           (test/testing "should have one additional ninja"
-            (test/is (= (inc (count (:ninja/ninjas test-village)))
-                        (count (:ninja/ninjas plus-jonin))))))))
+            (test/is (= (inc (count (:village/ninjas test-village)))
+                        (count (:village/ninjas plus-jonin))))))))
     (let [plus-kage (village/recruit-ninja :kage test-village)]
       (test/testing "recruit a kage"
         (test/testing "should pass spec"
           (test/is (s/valid? :village/village plus-kage)))
         (test/testing "should have one additional ninja"
-          (test/is (= (inc (count (:ninja/ninjas test-village)))
-                      (count (:ninja/ninjas plus-kage)))))))))
+          (test/is (= (inc (count (:village/ninjas test-village)))
+                      (count (:village/ninjas plus-kage)))))))))
