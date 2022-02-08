@@ -52,3 +52,11 @@
   {:core/name "ninja ramen shop"
    :village/imp-type :ramen-shop
    :village/imp-quality 1})
+
+(s/fdef upgrade-improvement
+        :args :village/improvement
+        :ret :village/improvement)
+(defn upgrade-improvement [improvement & [improve-by]]
+  (update improvement :village/imp-quality 
+          (partial + (or improve-by 1))))
+
