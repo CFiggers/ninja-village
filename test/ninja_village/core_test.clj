@@ -25,9 +25,7 @@
 
 (def leaf-ninjas [a-ninja])
 
-(def an-improvement {:core/name "ninja academy"
-                     :village/imp-type :academy
-                     :village/imp-quality 1})
+(def an-improvement village/canonical-academy)
 
 (def leaf-improvements {:academy an-improvement})
 
