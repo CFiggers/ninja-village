@@ -1,8 +1,6 @@
 (ns ninja-village.ninja
-  (:require [clojure.spec.alpha :as s]))
-
-(s/def :core/stat (s/and int? #(<= % 6) #(>= % 1)))
-(s/def :core/name string?)
+  (:require [clojure.spec.alpha :as s]
+            [ninja-village.core-specs :as core]))
 
 (s/def :ninja/speed :core/stat)
 (s/def :ninja/jutsu :core/stat)

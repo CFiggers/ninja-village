@@ -1,9 +1,7 @@
 (ns ninja-village.village
   (:require [clojure.spec.alpha :as s]
-            [ninja-village.ninja :as ninja]))
-
-(s/def :core/stat (s/and int? #(<= % 6) #(>= % 1)))
-(s/def :core/name string?)
+            [ninja-village.ninja :as ninja]
+            [ninja-village.core-specs :as core]))
 
 (s/def :village/imp-type #{:academy :library :hospital :ramen-shop})
 (s/def :village/imp-quality :core/stat)
@@ -13,11 +11,14 @@
 
 (s/def :village/improvements (s/map-of :village/imp-type
                                        :village/improvement))
+(s/def :village/ninjas :ninja/ninjas)
 (s/def :village/def int?)
 (s/def :village/village (s/keys :req [:core/name
-                                      :ninja/ninjas
+                                      :village/ninjas
                                       :village/def
                                       :village/improvements]))
+
+;; Related to :village/ninjas
 
 (s/fdef recruit-ninja
   :args :village/village
