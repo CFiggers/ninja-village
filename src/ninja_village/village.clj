@@ -27,29 +27,28 @@
   "Takes in a rank and a ninja village; trains a ninja of that rank"
   [rank village]
   (let [academy-quality (->> village :village/improvements
-                             :academy :village/imp-quality)]
-    (assoc village :ninja/ninjas
-           (conj (:ninja/ninjas village)
-                 (ninja/generate-ninja rank academy-quality)))))
+                             :academy :village/imp-quality)
+        new-ninja (ninja/generate-ninja rank academy-quality)]
+    (update village :ninja/ninjas (partial conj new-ninja))))
 
 ;; Related to :village/def
 
 ;; TODO - write tests for this function
-(s/fdef upgrade-def 
-        :args :village/village
-        :ret :village/village)
+(s/fdef upgrade-def
+  :args :village/village
+  :ret :village/village)
 (defn upgrade-def [village & [improve-by]]
   (update village :village/def
           (partial + (or improve-by 1))))
 
 ;; Related to :village/improvements
 
-(def canonical-academy 
+(def canonical-academy
   {:core/name "ninja academy"
    :village/imp-type :academy
    :village/imp-quality 1})
 
-(def canonical-library 
+(def canonical-library
   {:core/name "ninja library"
    :village/imp-type :library
    :village/imp-quality 1})
@@ -66,9 +65,9 @@
 
 ;; TODO - write tests for this function
 (s/fdef upgrade-improvement
-        :args :village/improvement
-        :ret :village/improvement)
+  :args :village/improvement
+  :ret :village/improvement)
 (defn upgrade-improvement [improvement & [improve-by]]
-  (update improvement :village/imp-quality 
+  (update improvement :village/imp-quality
           (partial + (or improve-by 1))))
 
