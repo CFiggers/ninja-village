@@ -11,11 +11,31 @@
                      (test (:ninja/ninja-stats
                             ninja-defending)))]))))
 
-;; TODO - Refactor this to separate determining winner from
-;;        declaring winner in terminal
-(defn det-winner [ninja-att ninja-def]
-  (if (< 1 (reduce + (map #(if % 1 0)
-                          (vals (ninja-fight ninja-att ninja-def)))))
-    (println (:core/name ninja-att) "has won the fight!")
-    (println (:core/name ninja-def) "has won the fight!")))
 
+(defn get-winner [ninja-att ninja-def]
+  (let [attacker-won (< 1 (reduce + (map #(if % 1 0)
+                                         (vals (ninja-fight ninja-att ninja-def)))))
+        winning-ninja (if attacker-won ninja-att ninja-def)
+        losing-ninja (if attacker-won ninja-def ninja-att)]
+    {:winner winning-ninja
+     :loser losing-ninja}))
+
+(defn print-result [{:keys [winner loser]}]
+  (println (str (:core/name winner) " beat " (:core/name loser) "!")))
+
+; ninjas -> find out who won -> add experience
+; winners -> print winner to console
+
+(defn give-experience [results]
+  (update-in results [:winner :ninja/practice] #(+ % 100)))
+
+(defn save-results [results]
+  (spit "results.edn" results))
+
+(defn triple-threat
+  "does it all"
+  [att-ninja def-ninja]
+  (let [result (get-winner att-ninja def-ninja)
+        exp-result (give-experience result)]
+    (print-result exp-result)
+    (save-results exp-result)))
