@@ -1,0 +1,1 @@
+{:winner {:core/name "Ninja Trainee", :ninja/rank :chunin, :ninja/ninja-stats #:ninja{:health 2, :jutsu 4, :speed 2, :stealth 3, :tools 3}, :ninja/practice 100}, :loser {:core/name "Ninja Trainee", :ninja/rank :genin, :ninja/ninja-stats #:ninja{:health 1, :jutsu 2, :speed 3, :stealth 1, :tools 1}, :ninja/practice 0}}
